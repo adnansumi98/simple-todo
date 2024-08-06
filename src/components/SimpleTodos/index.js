@@ -1,6 +1,7 @@
 import {Component} from 'react'
 
 import TodoItem from '../TodoItem'
+import AddTodo from '../AddTodo'
 
 import './index.css'
 
@@ -53,6 +54,29 @@ class SimpleTodos extends Component {
     })
   }
 
+  addTodoList = (event, newTodo) => {
+    event.preventDefault()
+    this.setState(prevState => ({
+      todosList: [
+        ...prevState.todosList,
+        {id: prevState.todosList.length + 1, title: newTodo},
+      ],
+    }))
+  }
+
+  editTodoList = (id, editedTask) => {
+    const {todosList} = this.state
+    const index = todosList.findIndex(todo => todo.id === id)
+
+    if (index !== -1) {
+      const updatedTodoList = [...todosList]
+      updatedTodoList[index] = {id, title: editedTask}
+      this.setState({todosList: updatedTodoList})
+    } else {
+      console.log(`Todo with id ${id} not Found`)
+    }
+  }
+
   render() {
     const {todosList} = this.state
 
@@ -60,12 +84,14 @@ class SimpleTodos extends Component {
       <div className="app-container">
         <div className="simple-todos-container">
           <h1 className="heading">Simple Todos</h1>
+          <AddTodo addTodoList={this.addTodoList} />
           <ul className="todos-list">
             {todosList.map(eachTodo => (
               <TodoItem
                 key={eachTodo.id}
                 todoDetails={eachTodo}
                 deleteTodo={this.deleteTodo}
+                editTodoList={this.editTodoList}
               />
             ))}
           </ul>
