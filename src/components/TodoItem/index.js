@@ -27,7 +27,7 @@ const TodoItem = props => {
       {alterButton === 'edit' ? (
         <p className="title">{title}</p>
       ) : (
-        <input
+        <textarea
           className="title title-edit"
           value={task}
           onChange={event => setTask(event.target.value)}

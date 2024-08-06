@@ -5,21 +5,34 @@ import './index.css'
 const AddTodo = props => {
   const {addTodoList} = props
   const [newTodo, setNewTodo] = useState('')
+  const [times, setTimes] = useState(1)
 
   return (
     <form
       className="addtodo-form"
       onSubmit={event => {
-        addTodoList(event, newTodo)
+        for (let i = 0; i < times; i += 1) {
+          addTodoList(event, newTodo)
+        }
         setNewTodo('')
       }}
     >
-      <input
-        type="text"
-        className="addtodo-input"
+      <textarea
+        className="input addtodo-input"
         value={newTodo}
         onChange={event => {
           setNewTodo(event.target.value)
+        }}
+      />
+      <input
+        type="number"
+        className="input times-input"
+        value={times}
+        onChange={event => {
+          const {value} = event.target
+          if (value > 0) {
+            setTimes(value)
+          }
         }}
       />
       <button className="btn addtodo-button" type="submit">

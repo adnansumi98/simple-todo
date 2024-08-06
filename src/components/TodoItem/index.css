@@ -13,11 +13,7 @@
   font-family: 'Roboto';
   font-size: 14px;
   max-width: 60%;
-}
-
-.title-edit {
-  padding: 10px;
-  margin: 10px;
+  min-width: 50%;
 }
 
 .btn {
@@ -90,5 +86,9 @@
     max-width: 55px;
     padding-left: 12px !important;
     padding-right: 12px !important;
+  }
+  .title-edit {
+    padding: 10px;
+    margin: 10px;
   }
 }
